@@ -82,6 +82,9 @@ class DisplayUI:
         """)
         st.dataframe(self.process_data.get_statistics())
 
+        st.subheader("Tamaño muestral")
+        st.dataframe(self.process_data.balance_per_class())
+
     def display_graphs(self):
         """Muestra los gráficos relacionados con el conjunto de datos de vino tinto."""
         st.title("Gráficos de Estadísticos Básicos del Conjunto de Datos de Vino Tinto")

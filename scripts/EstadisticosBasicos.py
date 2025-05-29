@@ -27,6 +27,23 @@ class ProcessData:
     def get_statistics_by_column(self, column):
         return self.df[column].describe()
     
+    def balance_per_class(self):
+        columnas = []
+        valores = []
+        min_samples = 30
+
+        for _, column in enumerate(self.df.columns):
+           class_balance = self.df[column].value_counts().sort_index()
+           sufficient = all(class_balance >= min_samples)
+           columnas.append(column)
+           valores.append("Sí" if sufficient else "Sí")      
+        
+        return pd.DataFrame({
+            'Variable': columnas,
+            'Suficiente': valores
+        })
+           
+    
 
 
     # def estadisticos_basicos(self):
@@ -53,13 +70,17 @@ class ProcessData:
 if __name__ == "__main__":
     process_data = ProcessData()
     df = process_data.get_data()
-    print(df)
-    print("-"*100)
-    statistics = process_data.get_statistics()
-    print(statistics)
-    print("-"*100)
-    statistics_by_column = process_data.get_statistics_by_column('quality')
-    print(statistics_by_column)
+    balance = process_data.balance_per_class()
+    for i in balance.keys():
+        print("Nombre de la variable " + i + " ¿Es suficiente para el análisis? " + balance[i])
+        print()
+    # print(df)
+    # print("-"*100)
+    # statistics = process_data.get_statistics()
+    # print(statistics)
+    # print("-"*100)
+    # statistics_by_column = process_data.get_statistics_by_column('quality')
+    # print(statistics_by_column)
 
     
     # Interfaz de usuario para mostrar los estadísticos básicos
