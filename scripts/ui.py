@@ -79,6 +79,9 @@ class DisplayUI:
         st.subheader("Tamaño muestral")
         st.dataframe(self.process_data.balance_per_class())
 
+        st.subheader("Regresion lineal: Alcohol/Densidad")
+        st.dataframe(self.process_data.regresion_lineal())
+
     def display_graphs(self):
         """Muestra los gráficos relacionados con el conjunto de datos de vino tinto."""
         st.title("Gráficos de Estadísticos Básicos del Conjunto de Datos de Vino Tinto")
@@ -99,6 +102,11 @@ class DisplayUI:
         # Mostrar la matriz de correlacion
         st.subheader("Matriz de correlacion")
         fig = self.graficador.grafica_correlacion()
+        st.pyplot(fig)
+
+        # Mostrar la regresion lineal alcohol/densidad
+        st.subheader("Matriz de correlacion")
+        fig = self.graficador.graficar_regresionLineal()
         st.pyplot(fig)
         
 

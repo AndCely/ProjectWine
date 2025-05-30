@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
 # -*- coding: utf-8 -*-
 
 # Cargar el conjunto de datos de vino tinto
@@ -43,37 +45,34 @@ class ProcessData:
             'Suficiente': valores
         })
            
+    def regresion_lineal(self):
+        model = LinearRegression()
+        model.fit(self.df[['alcohol']], self.df[['density']])
+        beta0 = model.intercept_
+        beta1 = model.coef_[0]
+        self.y_pred = model.predict(self.df[['alcohol']])
+        r2 = r2_score(self.df['density'], self.y_pred)
+        return pd.DataFrame({
+            'beta 0': beta0,
+            'beta 1': beta1,
+            'r2':r2
+        })
     
-
-
-    # def estadisticos_basicos(self):
-    #     """
-    # Calcula estadísticos básicos de un DataFrame de pandas.
-    
-    # Args:
-    #     df (pd.DataFrame): DataFrame con los datos.
-    
-    # Returns:
-    #     pd.DataFrame: DataFrame con los estadísticos básicos.
-    # """
-    # estadisticos = pd.DataFrame({
-    #     'Media': df.mean(),
-    #     'Mediana': df.median(),
-    #     'Desv Estándar': df.std(),
-    #     'Coef de Desv': (df.std() / df.mean()) * 100,
-    #     'Mínimo': df.min(),
-    #     'Máximo': df.max()
-    # })
-    
-    # return estadisticos
+    def obtener_y_pred(self):
+        self.regresion_lineal()
+        return self.y_pred
 
 if __name__ == "__main__":
     process_data = ProcessData()
     df = process_data.get_data()
-    balance = process_data.balance_per_class()
-    for i in balance.keys():
-        print("Nombre de la variable " + i + " ¿Es suficiente para el análisis? " + balance[i])
+    datos=process_data.regresion_lineal()
+    for i in datos.keys():
+        print("Nombre de la variable " + i + " Dato " + str(datos[i][0]))
         print()
+    # balance = process_data.balance_per_class()
+    # for i in balance.keys():
+    #     print("Nombre de la variable " + i + " ¿Es suficiente para el análisis? " + balance[i])
+    #     print()
     # print(df)
     # print("-"*100)
     # statistics = process_data.get_statistics()

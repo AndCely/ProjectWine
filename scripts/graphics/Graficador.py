@@ -6,6 +6,7 @@ from scripts.EstadisticosBasicos import ProcessData
 class Graficador:
     def __init__(self):
         self.data = ProcessData().get_data()
+        self.y_pred = ProcessData().obtener_y_pred()
 
     def graficar_distribucion(self):
        fig, axes = plt.subplots(4, 3, figsize=(15, 10))
@@ -32,6 +33,17 @@ class Graficador:
         plt.tight_layout()
         return fig
     
+    def graficar_regresionLineal(self):
+        fig = plt.figure(figsize=(6, 4))
+        plt.scatter(self.data['alcohol'], self.data['density'], alpha=0.6, label='Observaciones')
+        plt.plot(self.data['alcohol'], self.y_pred, linewidth=2, label='Línea de regresión')
+        plt.title('Alcohol vs. Densidad (vino)')
+        plt.xlabel('Alcohol')
+        plt.ylabel('Densidad')
+        plt.legend()
+        plt.tight_layout()
+        return fig
+    
     
 if __name__ == "__main__":
     graficador = Graficador()
@@ -42,7 +54,8 @@ if __name__ == "__main__":
         - 1. Grafica distribucion
         - 2. Grafica boxplots
         - 3. Matriz de correlacion
-        - 4. Salida
+        - 4. Regresion Lineal
+        - 5. Salida
         """))
         if opcion == 1:
             fig = graficador.graficar_distribucion()
@@ -57,6 +70,10 @@ if __name__ == "__main__":
         elif opcion == 3:
             fig = graficador.grafica_correlacion()
             plt.show()
-
+        
         elif opcion == 4:
+            fig = graficador.graficar_regresionLineal()
+            plt.show()
+
+        elif opcion == 5:
             break
