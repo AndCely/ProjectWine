@@ -69,23 +69,4 @@ if __name__ == "__main__":
     for i in datos.keys():
         print("Nombre de la variable " + i + " Dato " + str(datos[i][0]))
         print()
-    # balance = process_data.balance_per_class()
-    # for i in balance.keys():
-    #     print("Nombre de la variable " + i + " ¿Es suficiente para el análisis? " + balance[i])
-    #     print()
-    # print(df)
-    # print("-"*100)
-    # statistics = process_data.get_statistics()
-    # print(statistics)
-    # print("-"*100)
-    # statistics_by_column = process_data.get_statistics_by_column('quality')
-    # print(statistics_by_column)
 
-    
-    # Interfaz de usuario para mostrar los estadísticos básicos
-    # print("Cálculo de estadísticos básicos del conjunto de datos de vino tinto:")
-    # Calcular y mostrar los estadísticos básicos
-    # estadisticos = estadisticos_basicos(df)
-    # print(estadisticos)
-
-# Graficar los estadísticos básicos
