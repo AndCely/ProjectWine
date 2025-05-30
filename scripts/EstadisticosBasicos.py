@@ -1,3 +1,20 @@
+import os
+from pathlib import Path
+
+# Obtiene la ruta absoluta del archivo actual
+ruta_actual = Path(__file__).resolve()
+
+# Sube dos niveles para llegar a la raíz del proyecto (ajusta según tu estructura)
+raiz_proyecto = ruta_actual.parent.parent
+
+# Añade la raíz del proyecto al PYTHONPATH
+os.environ["PYTHONPATH"] = str(raiz_proyecto)
+
+# (Opcional) También puedes añadirlo a sys.path para el script actual:
+import sys
+if str(raiz_proyecto) not in sys.path:
+    sys.path.append(str(raiz_proyecto))
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
