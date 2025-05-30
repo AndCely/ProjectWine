@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from EstadisticosBasicos import ProcessData
 from settings import Settings
-from graphics.GrphsDistribucionBalanceada import GrphsDistribucionBalanceada
+from scripts.graphics.Graficador import Graficador
 
 class MainUI():
     """Clase principal para la interfaz de usuario de Streamlit."""
@@ -16,14 +16,8 @@ class MainUI():
         # Inicializar la interfaz de usuario para mostrar los estadísticos básicos
         self.display_ui = DisplayUI()
         
-        # Inicializa el conjunto de datos de vino tinto
-        self.process_data = ProcessData()
-
         # Configurar la página de Streamlit
-        self._initialize_ui()
-
-     
-        
+        self._initialize_ui() 
         
     # Método para inicializar la interfaz de usuario
     def _initialize_ui(self):
@@ -68,8 +62,8 @@ class DisplayUI:
         # Inicializa el conjunto de datos de vino tinto
         self.process_data = ProcessData()
 
-        # Inicializa el gráfico de distribución balanceada
-        self.grphs_distribucion_balanceada = GrphsDistribucionBalanceada()
+        # Inicializa los graficos
+        self.graficador = Graficador()
 
     def display_statistics(self):
         st.title("Estadisticas Básicas")
@@ -82,6 +76,12 @@ class DisplayUI:
         """)
         st.dataframe(self.process_data.get_statistics())
 
+        st.subheader("Tamaño muestral")
+        st.dataframe(self.process_data.balance_per_class())
+
+        st.subheader("Regresion lineal: Alcohol/Densidad")
+        st.dataframe(self.process_data.regresion_lineal())
+
     def display_graphs(self):
         """Muestra los gráficos relacionados con el conjunto de datos de vino tinto."""
         st.title("Gráficos de Estadísticos Básicos del Conjunto de Datos de Vino Tinto")
@@ -89,10 +89,26 @@ class DisplayUI:
         Los gráficos incluyen la media de cada variable y otros estadísticos relevantes.
         """)
 
-        # Mostrar los gráficos de la distribución balanceada
-        st.subheader("Gráficos de Distribución Balanceada")
-        fig = self.grphs_distribucion_balanceada.graficar_distribucion_balanceada()
+        # Mostrar los gráficos de la distribución
+        st.subheader("Gráficos de Distribución")
+        fig = self.graficador.graficar_distribucion()
         st.pyplot(fig)
+
+        # Mostrar los gráficos de boxplots
+        st.subheader("Gráficos de Boxplots")
+        fig = self.graficador.graficar_boxplots()
+        st.pyplot(fig)
+
+        # Mostrar la matriz de correlacion
+        st.subheader("Matriz de correlacion")
+        fig = self.graficador.grafica_correlacion()
+        st.pyplot(fig)
+
+        # Mostrar la regresion lineal alcohol/densidad
+        st.subheader("Matriz de correlacion")
+        fig = self.graficador.graficar_regresionLineal()
+        st.pyplot(fig)
+        
 
     def display_home(self):
         """Ejecuta la aplicación Streamlit."""
