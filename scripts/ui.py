@@ -1,6 +1,6 @@
 # Realizar las importaciones necesarias
 import sys
-sys.path.append('C:\\Users\USUARIO\Documents\\Trabajos Universidad\\2do Semestre\\Estadistica descriptiva\\AnalisisEstadistico_3erCorte')
+sys.path.append('AnalisisEstadistico_3erCorte\\')
 
 import streamlit as st
 from EstadisticosBasicos import ProcessData
