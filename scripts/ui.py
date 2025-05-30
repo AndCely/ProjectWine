@@ -1,7 +1,8 @@
 # Realizar las importaciones necesarias
+import sys
+sys.path.append('C:\\Users\USUARIO\Documents\\Trabajos Universidad\\2do Semestre\\Estadistica descriptiva\\AnalisisEstadistico_3erCorte')
+
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
 from EstadisticosBasicos import ProcessData
 from settings import Settings
 from scripts.graphics.Graficador import Graficador
