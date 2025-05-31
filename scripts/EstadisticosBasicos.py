@@ -55,7 +55,7 @@ class ProcessData:
            class_balance = self.df[column].value_counts().sort_index()
            sufficient = all(class_balance >= min_samples)
            columnas.append(column)
-           valores.append("Sí" if sufficient else "Sí")      
+           valores.append("Sí" if sufficient else "No")      
         
         return pd.DataFrame({
             'Variable': columnas,
