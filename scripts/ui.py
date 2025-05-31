@@ -123,7 +123,8 @@ class DisplayUI:
         st.subheader("Grafico de torta (Calidad)")
         fig = self.graficador.graficar_torta()
         st.pyplot(fig)
-
+        st.subheader("Grafico de torta (Calidad)")
+        st.subheader("Grafico de torta (Calidad)")
         # Mostrar la regresion lineal alcohol/densidad
         st.subheader("regresion lineal pH/densidad")
         fig = self.graficador.graficar_regresionLineal()
