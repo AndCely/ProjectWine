@@ -24,6 +24,7 @@ class Graficador:
     def __init__(self):
         self.data = ProcessData().get_data()
         self.y_pred = ProcessData().obtener_y_pred()
+        self.conteo = ProcessData().get_range_quality()
 
     def graficar_distribucion(self):
        fig, axes = plt.subplots(4, 3, figsize=(15, 10))
@@ -61,6 +62,33 @@ class Graficador:
         plt.tight_layout()
         return fig
     
+    def graficar_torta(self):
+       # Crear una figura con subplots para cada variable
+       fig, axes = plt.subplots(4, 3, figsize=(15, 10))
+       
+       # Para cada variable en el dataset
+       for i, col in enumerate(self.data.columns):
+           # Obtener el eje correspondiente
+           ax = axes[i // 3, i % 3]
+           
+           # Agrupar los datos por calidad y calcular porcentajes
+           datos_agrupados = self.data.groupby('quality')[col].mean()
+           
+           # Crear el gráfico de torta
+           ax.pie(datos_agrupados, 
+                  labels=datos_agrupados.index,
+                  autopct='%1.1f%%',
+                  startangle=90,
+                  colors=sns.color_palette('pastel'),
+                  textprops={'fontsize':6},
+                  labeldistance=1.1)
+           
+           # Configurar título
+           ax.set_title(f'Distribución de {col} por Calidad')
+       
+       plt.tight_layout()
+       return fig
+    
     
 if __name__ == "__main__":
     graficador = Graficador()
@@ -72,7 +100,8 @@ if __name__ == "__main__":
         - 2. Grafica boxplots
         - 3. Matriz de correlacion
         - 4. Regresion Lineal
-        - 5. Salida
+        - 5. Grafica Torta
+        - 6. Salida
         """))
         if opcion == 1:
             fig = graficador.graficar_distribucion()
@@ -93,4 +122,8 @@ if __name__ == "__main__":
             plt.show()
 
         elif opcion == 5:
+            fig = graficador.graficar_torta()
+            plt.show()
+
+        elif opcion == 6:
             break

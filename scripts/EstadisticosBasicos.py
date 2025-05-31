@@ -46,6 +46,22 @@ class ProcessData:
     def get_statistics_by_column(self, column):
         return self.df[column].describe()
     
+    # Ejemplo de cómo quedaría (sin modificar el código)
+    def get_range_quality(self):
+        # Definir los rangos manualmente
+        bins = [3, 4, 5, 6, 8]  # 5 bordes para crear 4 rangos
+        labels = ['Bajo', 'Medio-Bajo', 'Medio-Alto', 'Alto']  # 4 etiquetas para 4 rangos
+        
+        # Crear los rangos
+        rangos = pd.cut(self.df['quality'], 
+                        bins=bins, 
+                        labels=labels)
+        
+        # Crear la tabla de contingencia
+        conteo = pd.crosstab(rangos, self.df['quality'])
+        
+        return conteo
+
     def balance_per_class(self):
         columnas = []
         valores = []
