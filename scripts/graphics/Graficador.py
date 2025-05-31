@@ -24,7 +24,7 @@ class Graficador:
     def __init__(self):
         self.data = ProcessData().get_data()
         self.y_pred = ProcessData().obtener_y_pred()
-        self.conteo = ProcessData().get_range_quality()
+
 
     def graficar_distribucion(self):
        fig, axes = plt.subplots(4, 3, figsize=(15, 10))
