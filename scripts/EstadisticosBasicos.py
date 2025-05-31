@@ -9,7 +9,7 @@ raiz_proyecto = ruta_actual.parent.parent
 
 # Añade la raíz del proyecto al PYTHONPATH
 os.environ["PYTHONPATH"] = str(raiz_proyecto)
-
+print(raiz_proyecto)
 # (Opcional) También puedes añadirlo a sys.path para el script actual:
 import sys
 if str(raiz_proyecto) not in sys.path:
@@ -64,10 +64,10 @@ class ProcessData:
            
     def regresion_lineal(self):
         model = LinearRegression()
-        model.fit(self.df[['alcohol']], self.df[['density']])
+        model.fit(self.df[['pH']], self.df[['density']])
         beta0 = model.intercept_
         beta1 = model.coef_[0]
-        self.y_pred = model.predict(self.df[['alcohol']])
+        self.y_pred = model.predict(self.df[['pH']])
         r2 = r2_score(self.df['density'], self.y_pred)
         return pd.DataFrame({
             'beta 0': beta0,

@@ -5,7 +5,7 @@ from pathlib import Path
 ruta_actual = Path(__file__).resolve()
 
 # Sube dos niveles para llegar a la raíz del proyecto (ajusta según tu estructura)
-raiz_proyecto = ruta_actual.parent.parent
+raiz_proyecto = ruta_actual.parent.parent.parent
 
 # Añade la raíz del proyecto al PYTHONPATH
 os.environ["PYTHONPATH"] = str(raiz_proyecto)
@@ -51,11 +51,11 @@ class Graficador:
         return fig
     
     def graficar_regresionLineal(self):
-        fig = plt.figure(figsize=(6, 4))
-        plt.scatter(self.data['alcohol'], self.data['density'], alpha=0.6, label='Observaciones')
-        plt.plot(self.data['alcohol'], self.y_pred, linewidth=2, label='Línea de regresión')
-        plt.title('Alcohol vs. Densidad (vino)')
-        plt.xlabel('Alcohol')
+        fig = plt.figure(figsize=(8, 6))
+        plt.scatter(self.data['pH'], self.data['density'], alpha=0.6, label='Observaciones')
+        plt.plot(self.data['pH'], self.y_pred, linewidth=2, label='Línea de regresión', color='red')
+        plt.title('pH vs. Densidad (vino)')
+        plt.xlabel('pH')
         plt.ylabel('Densidad')
         plt.legend()
         plt.tight_layout()
