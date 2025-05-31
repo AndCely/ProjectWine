@@ -120,7 +120,7 @@ class DisplayUI:
         st.pyplot(fig)
 
         # Mostrar la regresion lineal alcohol/densidad
-        st.subheader("Matriz de correlacion")
+        st.subheader("regresion lineal pH/densidad")
         fig = self.graficador.graficar_regresionLineal()
         st.pyplot(fig)
         

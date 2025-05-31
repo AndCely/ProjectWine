@@ -52,8 +52,8 @@ class Graficador:
     
     def graficar_regresionLineal(self):
         fig = plt.figure(figsize=(8, 6))
-        plt.scatter(self.data['pH'], self.data['density'], alpha=0.6, label='Observaciones')
-        plt.plot(self.data['pH'], self.y_pred, linewidth=2, label='Línea de regresión', color='red')
+        sns.scatterplot(x=self.data['pH'], y=self.data['density'], label='Observaciones')
+        sns.regplot(x=self.data['pH'], y=self.data['density'], scatter=False, label='Línea de regresión', color='red')
         plt.title('pH vs. Densidad (vino)')
         plt.xlabel('pH')
         plt.ylabel('Densidad')
